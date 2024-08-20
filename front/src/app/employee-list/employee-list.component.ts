@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Employee } from "../employee";
+import { EmployeeService } from '../employee.service';
 
 
   @Component({
@@ -8,13 +9,13 @@ import { Employee } from "../employee";
     styleUrls: ['./employee-list.component.css']
   })
   export class EmployeeListComponent {
-    employees: Employee[]=[];
-    constructor() { }
-    ngOnInit(): void{
-      this.employees=[
-      {"id":1,"firstName":"John","lastName":"Doe","emailId":"john.doe@example.com"},
-      {"id":2,"firstName":"Jane","lastName":"Smith","emailId":"jane.smith@example.com"
-
-    }];}
+    employees: Employee[] = [];
+    constructor(private employeeService: EmployeeService) { }
+    ngOnInit(): void {
+      this.getEmployees()}
+      private getEmployees(){
+      this.employeeService.getEmployeesList().subscribe(data=>{
+        this.employees= data
+      });}
   };
 
